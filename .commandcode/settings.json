@@ -1,0 +1,19 @@
+{
+  "permissions": {
+    "allow": [
+      "Shell(npm:*)",
+      "Shell(netstat:*)",
+      "Shell(findstr:*)",
+      "Shell(curl -s -o /dev/null -w \"%{http_code}\" http://localhost:3000/)",
+      "Shell(curl -s http://localhost:3000/ -o %TEMP%\\cc-test.html -w \"%{http_code}\\n\")",
+      "powershell",
+      "Shell(rm:*)",
+      "Shell(curl -s -i http://localhost:3001/ 2 >& 1)",
+      "Shell(curl -s -i http://localhost:3001/ 2>&1)",
+      "Shell(dir node_modules\\.pnpm 2>nul | findstr /C:\"next@14.2.33\" & echo --- & dir node_modules\\next\\package.json 2>nul & echo --- & if exist pnpm-lock.yaml echo PNPM_LOCK_EXISTS & if exist package-lock.json echo NPM_LOCK_EXISTS)",
+      "Shell(pnpm:*)"
+    ],
+    "deny": [],
+    "defaultMode": "default"
+  }
+}

@@ -18,6 +18,7 @@ interface ResumeCardProps {
   badges?: readonly string[];
   period: string;
   description?: string;
+  expandable?: boolean;
 }
 export const ResumeCard = ({
   logoUrl,
@@ -28,11 +29,12 @@ export const ResumeCard = ({
   badges,
   period,
   description,
+  expandable = true,
 }: ResumeCardProps) => {
   const [isExpanded, setIsExpanded] = React.useState(false);
 
   const handleClick = (e: React.MouseEvent<HTMLAnchorElement, MouseEvent>) => {
-    if (description) {
+    if (description && expandable) {
       e.preventDefault();
       setIsExpanded(!isExpanded);
     }
@@ -75,7 +77,8 @@ export const ResumeCard = ({
                 )}
                 <ChevronRightIcon
                   className={cn(
-                    "size-4 translate-x-0 transform opacity-0 transition-all duration-300 ease-out group-hover:translate-x-1 group-hover:opacity-100",
+                    "size-4 translate-x-0 transform transition-all duration-300 ease-out group-hover:translate-x-1",
+                    expandable ? "opacity-0 group-hover:opacity-100" : "hidden",
                     isExpanded ? "rotate-90" : "rotate-0"
                   )}
                 />
@@ -86,7 +89,7 @@ export const ResumeCard = ({
             </div>
             {subtitle && <div className="font-sans text-xs">{subtitle}</div>}
           </CardHeader>
-          {description && (
+          {description && expandable && (
             <motion.div
               initial={{ opacity: 0, height: 0 }}
               animate={{
@@ -102,6 +105,9 @@ export const ResumeCard = ({
             >
               {description}
             </motion.div>
+          )}
+          {description && !expandable && (
+            <div className="mt-2 text-xs sm:text-sm">{description}</div>
           )}
         </div>
       </Card>
