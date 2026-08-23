@@ -7,6 +7,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { XIcon, ChevronRightIcon, ExternalLinkIcon } from "lucide-react";
 import Link from "next/link";
 import React from "react";
+import { createPortal } from "react-dom";
 
 interface TrainingModalProps {
   logoUrl: string;
@@ -65,98 +66,100 @@ export const TrainingModal = ({
       </button>
 
       <AnimatePresence>
-        {open && (
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            className="fixed inset-0 z-[999] flex items-center justify-center bg-black/60 p-4 backdrop-blur-sm"
-            onClick={() => setOpen(false)}
-          >
+        {open &&
+          createPortal(
             <motion.div
-              initial={{ scale: 0.95, opacity: 0 }}
-              animate={{ scale: 1, opacity: 1 }}
-              exit={{ scale: 0.95, opacity: 0 }}
-              transition={{ duration: 0.2 }}
-              onClick={(e) => e.stopPropagation()}
-              className="w-full max-w-2xl"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              className="fixed inset-0 z-[999] flex items-center justify-center bg-black/60 p-4 backdrop-blur-sm"
+              onClick={() => setOpen(false)}
             >
-              <Card className="p-6 shadow-xl">
-                <div className="flex items-start justify-between gap-4">
-                  <div className="flex items-center gap-3">
-                    <Avatar className="border size-12 bg-muted-background dark:bg-foreground">
-                      <AvatarImage
-                        src={logoUrl}
-                        alt={school}
-                        className="object-contain"
-                      />
-                      <AvatarFallback>{school[0]}</AvatarFallback>
-                    </Avatar>
-                    <div>
-                      <h3 className="font-semibold text-sm leading-tight">
-                        {school}
-                      </h3>
-                      <div className="text-xs text-muted-foreground">
-                        {period}
+              <motion.div
+                initial={{ scale: 0.95, opacity: 0 }}
+                animate={{ scale: 1, opacity: 1 }}
+                exit={{ scale: 0.95, opacity: 0 }}
+                transition={{ duration: 0.2 }}
+                onClick={(e) => e.stopPropagation()}
+                className="w-full max-w-2xl"
+              >
+                <Card className="p-6 shadow-xl">
+                  <div className="flex items-start justify-between gap-4">
+                    <div className="flex items-center gap-3">
+                      <Avatar className="border size-12 bg-muted-background dark:bg-foreground">
+                        <AvatarImage
+                          src={logoUrl}
+                          alt={school}
+                          className="object-contain"
+                        />
+                        <AvatarFallback>{school[0]}</AvatarFallback>
+                      </Avatar>
+                      <div>
+                        <h3 className="font-semibold text-sm leading-tight">
+                          {school}
+                        </h3>
+                        <div className="text-xs text-muted-foreground">
+                          {period}
+                        </div>
                       </div>
                     </div>
-                  </div>
-                  <button
-                    type="button"
-                    onClick={() => setOpen(false)}
-                    className="rounded-full p-1.5 text-muted-foreground transition-colors hover:bg-muted hover:text-foreground"
-                    aria-label="Close"
-                  >
-                    <XIcon className="size-4" />
-                  </button>
-                </div>
-
-                {degree && (
-                  <div className="mt-5">
-                    <Badge
-                      variant="secondary"
-                      className="align-middle text-xs"
+                    <button
+                      type="button"
+                      onClick={() => setOpen(false)}
+                      className="rounded-full p-1.5 text-muted-foreground transition-colors hover:bg-muted hover:text-foreground"
+                      aria-label="Close"
                     >
-                      Certification
-                    </Badge>
-                    <h4 className="mt-2 text-base font-semibold leading-snug">
-                      {degree}
-                    </h4>
+                      <XIcon className="size-4" />
+                    </button>
                   </div>
-                )}
 
-                {description && (
-                  <p className="mt-3 text-sm text-muted-foreground">
-                    {description}
-                  </p>
-                )}
+                  {degree && (
+                    <div className="mt-5">
+                      <Badge
+                        variant="secondary"
+                        className="align-middle text-xs"
+                      >
+                        Certification
+                      </Badge>
+                      <h4 className="mt-2 text-base font-semibold leading-snug">
+                        {degree}
+                      </h4>
+                    </div>
+                  )}
 
-                {renderUrl && (
-                  <div className="mt-5">
-                    <img
-                      src={renderUrl}
-                      alt={`${degree || school} certificate`}
-                      className="w-full h-auto rounded-lg border shadow-sm"
-                      loading="lazy"
-                    />
-                  </div>
-                )}
+                  {description && (
+                    <p className="mt-3 text-sm text-muted-foreground">
+                      {description}
+                    </p>
+                  )}
 
-                {href && (
-                  <Link
-                    href={href}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="mt-5 inline-flex items-center gap-1.5 text-xs font-medium text-foreground underline-offset-4 hover:underline"
-                  >
-                    View certificate
-                    <ExternalLinkIcon className="size-3" />
-                  </Link>
-                )}
-              </Card>
-            </motion.div>
-          </motion.div>
-        )}
+                  {renderUrl && (
+                    <div className="mt-5">
+                      <img
+                        src={renderUrl}
+                        alt={`${degree || school} certificate`}
+                        className="w-full h-auto rounded-lg border shadow-sm"
+                        loading="lazy"
+                      />
+                    </div>
+                  )}
+
+                  {href && (
+                    <Link
+                      href={href}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="mt-5 inline-flex items-center gap-1.5 text-xs font-medium text-foreground underline-offset-4 hover:underline"
+                    >
+                      View certificate
+                      <ExternalLinkIcon className="size-3" />
+                    </Link>
+                  )}
+                </Card>
+              </motion.div>
+            </motion.div>,
+            document.body
+          )}
       </AnimatePresence>
     </>
   );
