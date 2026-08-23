@@ -8,26 +8,29 @@ export const DATA = {
   location: "Jakarta, ID",
   locationLink: "https://www.google.com/maps/place/jakarta",
   description:
-    "Professional Nurse and Computer Enthusiast",
+    "Nurse & Full-Stack Developer | Healthcare AI Builder",
   summary:
-    "Currently working for [RSKD Duren Sawit as Professional Nurse](#work), sometimes freelance as [Graphic Design, and Website Development](#projects). Based in Jakarta, Indonesia. This website contains design works that I have produced over the past few years. Find various types of design projects such as banner designs, flyer designs, video editing, website development, and many more.",
+    "Registered Nurse (Ns) specializing in psychiatric care, and full-stack developer building healthcare technology products. Founder of [NakesPro](#projects), [Setapak](#projects), and [Ngaskep](#projects) — combining clinical domain expertise with production-grade web development. Based in Jakarta, Indonesia.",
   avatarUrl: "/me.png",
   skills: [
+    "TypeScript",
     "Next.js",
     "React",
-    "Nuxt",
+    "Nuxt 3",
     "NestJS",
-    "TypeScript",
+    "Python",
+    "Prompt Engineering",
+    "Healthcare AI",
     "PostgreSQL",
     "Prisma",
     "Tailwind CSS",
     "Docker",
     "Cloudflare R2",
-    "Next.js API Routes",
     "Better Auth",
     "Framer Motion",
     "MySQL",
     "Wordpress",
+    "Git",
     "Photoshop",
     "Premiere Pro",
     "Canva",
@@ -37,8 +40,8 @@ export const DATA = {
     { href: "/#projects", icon: FolderIcon, label: "Projects" },
   ],
   contact: {
-    email: "hello@example.com",
-    tel: "+123456789",
+    email: "salmandevindo@gmail.com",
+    tel: "+628568461024",
     social: {
       GitHub: {
         name: "GitHub",
@@ -56,7 +59,7 @@ export const DATA = {
       },
       email: {
         name: "Send Email",
-        url: "#",
+        url: "mailto:salmandevindo@gmail.com",
         icon: Icons.email,
 
         navbar: false,
@@ -65,6 +68,18 @@ export const DATA = {
   },
 
   work: [
+    {
+      company: "Self-Employed",
+      href: "https://salmanalfarisi.id",
+      badges: [],
+      location: "Remote",
+      title: "Freelance Full-Stack Developer",
+      logoUrl: "/me.png",
+      start: "2022",
+      end: "Until Now",
+      description:
+        "Built and deployed 3 production web apps: NakesPro (healthcare homecare marketplace), Setapak (mental health self-help companion), and Ngaskep (digital nursing assistant). Managed full DevOps pipeline with Docker Swarm, Easypanel, and Cloudflare R2. Client work includes a construction company website. Tech stack: TypeScript, Next.js, Nuxt 3, NestJS, PostgreSQL, Prisma.",
+    },
     {
       company: "RSKD Duren Sawit",
       href: "https://rsdurensawit.jakarta.go.id/",
