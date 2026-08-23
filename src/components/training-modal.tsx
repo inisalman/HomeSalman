@@ -15,6 +15,7 @@ interface TrainingModalProps {
   period: string;
   description?: string;
   href?: string;
+  renderUrl?: string;
 }
 
 export const TrainingModal = ({
@@ -24,6 +25,7 @@ export const TrainingModal = ({
   period,
   description,
   href,
+  renderUrl,
 }: TrainingModalProps) => {
   const [open, setOpen] = React.useState(false);
 
@@ -77,7 +79,7 @@ export const TrainingModal = ({
               exit={{ scale: 0.95, opacity: 0 }}
               transition={{ duration: 0.2 }}
               onClick={(e) => e.stopPropagation()}
-              className="w-full max-w-md"
+              className="w-full max-w-2xl"
             >
               <Card className="p-6 shadow-xl">
                 <div className="flex items-start justify-between gap-4">
@@ -127,6 +129,17 @@ export const TrainingModal = ({
                   <p className="mt-3 text-sm text-muted-foreground">
                     {description}
                   </p>
+                )}
+
+                {renderUrl && (
+                  <div className="mt-5">
+                    <img
+                      src={renderUrl}
+                      alt={`${degree || school} certificate`}
+                      className="w-full h-auto rounded-lg border shadow-sm"
+                      loading="lazy"
+                    />
+                  </div>
                 )}
 
                 {href && (

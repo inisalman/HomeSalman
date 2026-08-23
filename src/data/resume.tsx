@@ -136,6 +136,8 @@ export const DATA = {
     {
       school: "Hacktiv8 IBM SkillsBuild",
       href: "https://students.hacktiv8.com/certificates/bc0098be-f2cd-4b44-bbe9-731ecf192420",
+      renderUrl:
+        "https://certificate-and-transcript.s3.ap-southeast-1.amazonaws.com/documents/e16c9f7e-775f-4f27-afc6-479184aa72af/1785205457870-bc0098be-f2cd-4b44-bbe9-731ecf192420-page-1.jpg",
       degree: "AI Agent for Healthcare",
       logoUrl: "https://academic.hacktiv8.com/static/media/hacktiv-navbar.35edca5f.png",
       start: "July 2026",
@@ -146,6 +148,7 @@ export const DATA = {
     {
       school: "KEMENKES",
       href: "https://sertifikatlms.kemkes.go.id/index.php/Sertifikat/generate/4d7a637a4e444d334d7a67744d7a597a4e7930304e7a4d344c5749344d7a41744d7a677a4e7a4d344d7a457a4d6a4d30",
+      renderUrl: "",
       degree: "Basic Trauma Cardiac Life Support (BTCLS)",
       logoUrl: "https://upload.wikimedia.org/wikipedia/commons/8/89/Logo_Kementerian_Kesehatan_Republik_Indonesia_%282024_rev%29.svg",
       start: "April 2026",
@@ -156,6 +159,7 @@ export const DATA = {
     {
       school: "Pro Emergency",
       href: "https://lms.kemkes.go.id/certificate/view/7787ca9c-2b9a-4f5b-937e-d9a7f0e9dc1c",
+      renderUrl: "",
       degree: "Workshop Psychiatric Emergency Nursing",
       logoUrl: "https://www.proemergency.com/assets/gambar/logo/20231003172541.png",
       start: "November 2024",

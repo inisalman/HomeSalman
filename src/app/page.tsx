@@ -120,6 +120,7 @@ export default function Page() {
                 }
                 description={training.description}
                 href={training.href}
+                renderUrl={training.renderUrl}
               />
             </BlurFade>
           ))}
