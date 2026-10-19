@@ -14,7 +14,6 @@ export const DATA = {
   avatarUrl: "/me.png",
   skills: {
     own: [
-      "NestJS",
       "Python",
       "Prompt Engineering",
       "Healthcare AI",
@@ -32,6 +31,7 @@ export const DATA = {
       "cPanel",
     ],
     aiAssisted: [
+      "NestJS",
       "TypeScript",
       "Next.js",
       "React",
