@@ -5,12 +5,12 @@ export const DATA = {
   name: "Salman Al Farisi",
   initials: "SA",
   url: "https://salmanalfarisi.id",
-  location: "Jakarta, ID",
-  locationLink: "https://www.google.com/maps/place/jakarta",
+  location: "Yogyakarta, ID",
+  locationLink: "https://www.google.com/maps/place/yogyakarta",
   description:
     "Nurse & Full-Stack Developer | Healthcare AI Builder",
   summary:
-    "Registered Nurse (Ns) specializing in psychiatric care, and full-stack developer building healthcare technology products. Founder of [NakesPro](#projects), [Setapak](#projects), and [Ngaskep](#projects) — combining clinical domain expertise with production-grade web development. Based in Jakarta, Indonesia.",
+    "Registered Nurse (Ns) with a strong passion for technology, especially web development. I build full-stack web applications and healthcare technology products — founder of [NakesPro](#projects), [Setapak](#projects), and [Ngaskep](#projects) — combining clinical domain expertise with production-grade web development. Currently based in Yogyakarta, Indonesia.",
   avatarUrl: "/me.png",
   skills: [
     "TypeScript",
@@ -35,6 +35,9 @@ export const DATA = {
     "Photoshop",
     "Premiere Pro",
     "Canva",
+    "SEO",
+    "Google Search Console",
+    "cPanel",
   ],
   navbar: [
     { href: "/", icon: HomeIcon, label: "Home" },
@@ -75,7 +78,7 @@ export const DATA = {
       badges: [],
       location: "Remote",
       title: "Freelance Full-Stack Developer",
-      logoUrl: "/me.png",
+      logoUrl: "/sa-logo.svg",
       start: "2022",
       end: "Until Now",
       description:
@@ -89,7 +92,7 @@ export const DATA = {
       title: "Professional Nurse",
       logoUrl: "/rsds.jpg",
       start: "Sept 2024",
-      end: "Until Now",
+      end: "Oct 2026",
       description:
         "I have been working as a nurse in the psychiatric ward for patients with co-occurring physical illnesses at RSKD Duren Sawit, Jakarta. I provide holistic nursing care for individuals with mental health disorders and physical conditions, including administering medications, monitoring vital signs, and delivering therapeutic interventions such as group activity therapy and therapeutic communication. I have also completed the Workshop on Psychiatric Emergency Nursing to strengthen my skills in managing psychiatric",
     },
