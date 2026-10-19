@@ -178,14 +178,14 @@ export const DATA = {
       description:
         "Healthcare homecare marketplace connecting patients with healthcare professionals across Indonesia. Features professional search, service filtering, WhatsApp booking flow, and a funnel-tracking REST API.",
       technologies: [
-        "Next.js 16",
-        "React 19",
+        "Next.js",
         "Tailwind CSS",
         "PostgreSQL",
-        "Next.js API Routes",
         "Cloudflare R2",
         "Docker",
         "Easypanel",
+        "SEO",
+        "Google Search Console",
       ],
       links: [
         {
@@ -198,30 +198,70 @@ export const DATA = {
       video: "/nakespro.mp4",
     },
     {
-      title: "Setapak",
-      href: "https://setapak.build.web.id",
-      dates: "2026 - Present",
+      title: "PEMIRA Poltekkes Jakarta I",
+      href: "https://pemira.mpmpoltekkesjakarta1.com",
+      dates: "2021 - Present",
       active: true,
       description:
-        "Mental health self-help companion with PHQ-9/GAD-7 screening, daily mood check-in, and crisis support flow for users with anxiety and depressive symptoms.",
+        "Online general election (Pemilihan Raya) platform for student organizations at Poltekkes Kemenkes Jakarta I — covering HIMA, BEM, and MPM elections. Provides a secure digital voting flow with voter authentication, candidate profiles, and an admin dashboard for managing the election process.",
       technologies: [
         "Nuxt 3",
-        "NestJS",
-        "PostgreSQL",
-        "Prisma",
-        "Better Auth",
+        "Vue",
         "Tailwind CSS",
         "TypeScript",
+        "Cloudflare",
       ],
       links: [
         {
           type: "Website",
-          href: "https://setapak.build.web.id",
+          href: "https://pemira.mpmpoltekkesjakarta1.com",
           icon: <Icons.globe className="size-3" />,
         },
       ],
       image: "",
-      video: "/setapak.mp4",
+      video: "/pemira.webm",
+    },
+    {
+      title: "Naratama Creative",
+      href: "/project/naratama",
+      dates: "2023 - 2025",
+      active: false,
+      description:
+        "Landing page for Naratama Creative Agency, a creative industry agency focused on graphic design, animation, photography, and videography. The site supports the agency's branding, promotion, social media, and company profile work, helping organizations, companies, and individuals through creative ideas.",
+      technologies: [
+        "WordPress",
+        "Elementor",
+        "cPanel",
+        "SEO",
+        "Google Search Console",
+      ],
+      links: [
+        {
+          type: "Website",
+          href: "/project/naratama",
+          icon: <Icons.globe className="size-3" />,
+        },
+      ],
+      image: "",
+      video: "/naratama.mp4",
+    },
+    {
+      title: "Kopiluvium",
+      href: "",
+      dates: "2023 - 2025",
+      active: false,
+      description:
+        "Website for Kopiluvium, a popular Indonesian coffee shop and social hub brand originating from Tanjung Priok, North Jakarta. Built as a brand showcase and company profile site to highlight the coffee menu, store atmosphere, and social hub experience.",
+      technologies: [
+        "WordPress",
+        "Elementor",
+        "cPanel",
+        "SEO",
+        "Google Search Console",
+      ],
+      links: [],
+      image: "",
+      video: "/kopiluvium.mp4",
     },
     {
       title: "Ngaskep",
@@ -248,64 +288,30 @@ export const DATA = {
       video: "/ngaskep.mp4",
     },
     {
-      title: "Kopiluvium",
-      href: "",
-      dates: "2023 - 2025",
-      active: false,
-      description:
-        "Website for Kopiluvium, a popular Indonesian coffee shop and social hub brand originating from Tanjung Priok, North Jakarta. Built as a brand showcase and company profile site to highlight the coffee menu, store atmosphere, and social hub experience.",
-      technologies: [
-        "WordPress",
-        "Elementor",
-      ],
-      links: [],
-      image: "",
-      video: "/kopiluvium.mp4",
-    },
-    {
-      title: "Naratama Creative",
-      href: "/project/naratama",
-      dates: "2023 - 2025",
-      active: false,
-      description:
-        "Landing page for Naratama Creative Agency, a creative industry agency focused on graphic design, animation, photography, and videography. The site supports the agency's branding, promotion, social media, and company profile work, helping organizations, companies, and individuals through creative ideas.",
-      technologies: [
-        "WordPress",
-        "Elementor",
-      ],
-      links: [
-        {
-          type: "Website",
-          href: "/project/naratama",
-          icon: <Icons.globe className="size-3" />,
-        },
-      ],
-      image: "",
-      video: "/naratama.mp4",
-    },
-    {
-      title: "PEMIRA Poltekkes Jakarta I",
-      href: "https://pemira.mpmpoltekkesjakarta1.com",
-      dates: "2021 - Present",
+      title: "Setapak",
+      href: "https://setapak.build.web.id",
+      dates: "2026 - Present",
       active: true,
       description:
-        "Online general election (Pemilihan Raya) platform for student organizations at Poltekkes Kemenkes Jakarta I — covering HIMA, BEM, and MPM elections. Provides a secure digital voting flow with voter authentication, candidate profiles, and an admin dashboard for managing the election process.",
+        "Mental health self-help companion with PHQ-9/GAD-7 screening, daily mood check-in, and crisis support flow for users with anxiety and depressive symptoms.",
       technologies: [
         "Nuxt 3",
-        "Vue",
+        "NestJS",
+        "PostgreSQL",
+        "Prisma",
+        "Better Auth",
         "Tailwind CSS",
         "TypeScript",
-        "Cloudflare",
       ],
       links: [
         {
           type: "Website",
-          href: "https://pemira.mpmpoltekkesjakarta1.com",
+          href: "https://setapak.build.web.id",
           icon: <Icons.globe className="size-3" />,
         },
       ],
       image: "",
-      video: "/pemira.webm",
+      video: "/setapak.mp4",
     },
   ],
   

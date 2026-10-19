@@ -10,7 +10,7 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { cn } from "@/lib/utils";
-import { motion } from "framer-motion";
+import { AnimatePresence, motion } from "framer-motion";
 import { XIcon } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
@@ -130,19 +130,26 @@ export function ProjectCard({
 
       {open &&
         createPortal(
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            className="fixed inset-0 z-[999] flex items-center justify-center bg-black/60 p-4 backdrop-blur-sm"
-            onClick={() => setOpen(false)}
-          >
+          <AnimatePresence>
             <motion.div
-              initial={{ scale: 0.95, opacity: 0 }}
-              animate={{ scale: 1, opacity: 1 }}
-              transition={{ duration: 0.2 }}
-              onClick={(e) => e.stopPropagation()}
-              className="w-full max-w-2xl"
+              key="project-modal-overlay"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.15 }}
+              style={{ willChange: "opacity", WebkitBackdropFilter: "blur(4px)" }}
+              className="fixed inset-0 z-[999] flex items-center justify-center bg-black/60 p-4 backdrop-blur-sm transform-gpu"
+              onClick={() => setOpen(false)}
             >
+              <motion.div
+                initial={{ opacity: 0, y: 8 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: 8 }}
+                transition={{ duration: 0.18, ease: "easeOut" }}
+                style={{ willChange: "transform, opacity" }}
+                onClick={(e) => e.stopPropagation()}
+                className="w-full max-w-2xl transform-gpu"
+              >
               <Card className="overflow-hidden shadow-xl">
                 {video && (
                   <video
@@ -225,7 +232,8 @@ export function ProjectCard({
                 </div>
               </Card>
             </motion.div>
-          </motion.div>,
+          </motion.div>
+          </AnimatePresence>,
           document.body
         )}
     </>
