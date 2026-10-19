@@ -30,6 +30,7 @@ export const DATA = {
     "Framer Motion",
     "MySQL",
     "Wordpress",
+    "Elementor",
     "Git",
     "Photoshop",
     "Premiere Pro",
@@ -172,7 +173,7 @@ export const DATA = {
     {
       title: "NakesPro",
       href: "https://nakespro.id",
-      dates: "2025 - Present",
+      dates: "2026 - Present",
       active: true,
       description:
         "Healthcare homecare marketplace connecting patients with healthcare professionals across Indonesia. Features professional search, service filtering, WhatsApp booking flow, and a funnel-tracking REST API.",
@@ -199,7 +200,7 @@ export const DATA = {
     {
       title: "Setapak",
       href: "https://setapak.build.web.id",
-      dates: "2025 - Present",
+      dates: "2026 - Present",
       active: true,
       description:
         "Mental health self-help companion with PHQ-9/GAD-7 screening, daily mood check-in, and crisis support flow for users with anxiety and depressive symptoms.",
@@ -225,7 +226,7 @@ export const DATA = {
     {
       title: "Ngaskep",
       href: "https://ngaskep.web.id",
-      dates: "2025 - Present",
+      dates: "2026 - Present",
       active: true,
       description:
         "Digital nursing assistant for care planning: SDKI diagnoses, SIKI interventions, SLKI outcomes, health calculators, and a digital SOP library.",
@@ -245,6 +246,66 @@ export const DATA = {
       ],
       image: "",
       video: "/ngaskep.mp4",
+    },
+    {
+      title: "Kopiluvium",
+      href: "",
+      dates: "2023 - 2025",
+      active: false,
+      description:
+        "Website for Kopiluvium, a popular Indonesian coffee shop and social hub brand originating from Tanjung Priok, North Jakarta. Built as a brand showcase and company profile site to highlight the coffee menu, store atmosphere, and social hub experience.",
+      technologies: [
+        "WordPress",
+        "Elementor",
+      ],
+      links: [],
+      image: "",
+      video: "/kopiluvium.mp4",
+    },
+    {
+      title: "Naratama Creative",
+      href: "/project/naratama",
+      dates: "2023 - 2025",
+      active: false,
+      description:
+        "Landing page for Naratama Creative Agency, a creative industry agency focused on graphic design, animation, photography, and videography. The site supports the agency's branding, promotion, social media, and company profile work, helping organizations, companies, and individuals through creative ideas.",
+      technologies: [
+        "WordPress",
+        "Elementor",
+      ],
+      links: [
+        {
+          type: "Website",
+          href: "/project/naratama",
+          icon: <Icons.globe className="size-3" />,
+        },
+      ],
+      image: "",
+      video: "/naratama.mp4",
+    },
+    {
+      title: "PEMIRA Poltekkes Jakarta I",
+      href: "https://pemira.mpmpoltekkesjakarta1.com",
+      dates: "2021 - Present",
+      active: true,
+      description:
+        "Online general election (Pemilihan Raya) platform for student organizations at Poltekkes Kemenkes Jakarta I — covering HIMA, BEM, and MPM elections. Provides a secure digital voting flow with voter authentication, candidate profiles, and an admin dashboard for managing the election process.",
+      technologies: [
+        "Nuxt 3",
+        "Vue",
+        "Tailwind CSS",
+        "TypeScript",
+        "Cloudflare",
+      ],
+      links: [
+        {
+          type: "Website",
+          href: "https://pemira.mpmpoltekkesjakarta1.com",
+          icon: <Icons.globe className="size-3" />,
+        },
+      ],
+      image: "",
+      video: "/pemira.webm",
     },
   ],
   
