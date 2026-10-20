@@ -187,6 +187,7 @@ export default function Page() {
                   dates={project.dates}
                   tags={project.technologies}
                   image={project.image}
+                  images={(project as { images?: readonly string[] }).images}
                   video={project.video}
                   links={project.links}
                 />

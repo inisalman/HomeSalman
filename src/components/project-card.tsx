@@ -11,7 +11,7 @@ import {
 } from "@/components/ui/card";
 import { cn } from "@/lib/utils";
 import { AnimatePresence, motion } from "framer-motion";
-import { XIcon } from "lucide-react";
+import { ChevronLeftIcon, ChevronRightIcon, XIcon } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import React from "react";
@@ -26,6 +26,7 @@ interface Props {
   tags: readonly string[];
   link?: string;
   image?: string;
+  images?: readonly string[];
   video?: string;
   links?: readonly {
     icon: React.ReactNode;
@@ -43,11 +44,39 @@ export function ProjectCard({
   tags,
   link,
   image,
+  images,
   video,
   links,
   className,
 }: Props) {
   const [open, setOpen] = React.useState(false);
+  const [slide, setSlide] = React.useState(0);
+
+  const hasGallery = Boolean(images && images.length > 0);
+  const coverImage = hasGallery ? images![0] : image;
+
+  const goPrev = React.useCallback(() => {
+    if (!images || images.length === 0) return;
+    setSlide((s) => (s - 1 + images.length) % images.length);
+  }, [images]);
+
+  const goNext = React.useCallback(() => {
+    if (!images || images.length === 0) return;
+    setSlide((s) => (s + 1) % images.length);
+  }, [images]);
+
+  // reset slide & handle keyboard nav when modal opens
+  React.useEffect(() => {
+    if (!open) return;
+    setSlide(0);
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === "ArrowLeft") goPrev();
+      if (e.key === "ArrowRight") goNext();
+      if (e.key === "Escape") setOpen(false);
+    };
+    window.addEventListener("keydown", onKey);
+    return () => window.removeEventListener("keydown", onKey);
+  }, [open, goPrev, goNext]);
 
   return (
     <>
@@ -72,14 +101,21 @@ export function ProjectCard({
               className="pointer-events-none mx-auto h-40 w-full object-cover object-top" // needed because random black line at bottom of video
             />
           )}
-          {image && (
-            <Image
-              src={image}
-              alt={title}
-              width={500}
-              height={300}
-              className="h-40 w-full overflow-hidden object-cover object-top"
-            />
+          {!video && coverImage && (
+            <div className="relative">
+              <Image
+                src={coverImage}
+                alt={title}
+                width={500}
+                height={300}
+                className="h-40 w-full overflow-hidden object-cover object-top"
+              />
+              {hasGallery && (
+                <span className="absolute bottom-2 right-2 rounded-full bg-black/70 px-2 py-0.5 text-[10px] font-medium text-white">
+                  {images!.length} photos
+                </span>
+              )}
+            </div>
           )}
         </button>
         <CardHeader className="px-2">
@@ -162,7 +198,57 @@ export function ProjectCard({
                     className="max-h-[60vh] w-full bg-black object-contain"
                   />
                 )}
-                {!video && image && (
+                {!video && hasGallery && (
+                  <div className="relative bg-black">
+                    <Image
+                      src={images![slide]}
+                      alt={`${title} — ${slide + 1}`}
+                      width={800}
+                      height={450}
+                      className="max-h-[60vh] w-full object-contain"
+                    />
+                    {images!.length > 1 && (
+                      <>
+                        <button
+                          type="button"
+                          onClick={goPrev}
+                          aria-label="Previous image"
+                          className="absolute left-2 top-1/2 -translate-y-1/2 rounded-full bg-black/60 p-2 text-white transition-colors hover:bg-black/80"
+                        >
+                          <ChevronLeftIcon className="size-5" />
+                        </button>
+                        <button
+                          type="button"
+                          onClick={goNext}
+                          aria-label="Next image"
+                          className="absolute right-2 top-1/2 -translate-y-1/2 rounded-full bg-black/60 p-2 text-white transition-colors hover:bg-black/80"
+                        >
+                          <ChevronRightIcon className="size-5" />
+                        </button>
+                        <span className="absolute bottom-2 right-2 rounded-full bg-black/70 px-2 py-0.5 text-[11px] font-medium text-white">
+                          {slide + 1} / {images!.length}
+                        </span>
+                        <div className="absolute bottom-2 left-1/2 flex -translate-x-1/2 gap-1.5">
+                          {images!.map((_, idx) => (
+                            <button
+                              key={idx}
+                              type="button"
+                              onClick={() => setSlide(idx)}
+                              aria-label={`Go to image ${idx + 1}`}
+                              className={cn(
+                                "size-1.5 rounded-full transition-all",
+                                idx === slide
+                                  ? "w-4 bg-white"
+                                  : "bg-white/50 hover:bg-white/80"
+                              )}
+                            />
+                          ))}
+                        </div>
+                      </>
+                    )}
+                  </div>
+                )}
+                {!video && !hasGallery && image && (
                   <Image
                     src={image}
                     alt={title}
