@@ -144,7 +144,7 @@ export const DATA = {
     {
       school: "Dicoding",
       href: "https://www.dicoding.com/certificates/53XEMO610PRN",
-      renderUrl: "",
+      renderUrl: "/certificates/dicoding-ml.webp",
       degree: "Belajar Machine Learning untuk Pemula",
       logoUrl:
         "https://dicoding-web-img.sgp1.digitaloceanspaces.com/original/commons/new-ui-logo.png",
