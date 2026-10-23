@@ -156,7 +156,7 @@ export const DATA = {
     {
       school: "Dicoding",
       href: "https://www.dicoding.com/certificates/6RPNOD79QX2M",
-      renderUrl: "",
+      renderUrl: "/certificates/dicoding-python.webp",
       degree: "Memulai Pemrograman dengan Python",
       logoUrl:
         "https://dicoding-web-img.sgp1.digitaloceanspaces.com/original/commons/new-ui-logo.png",
