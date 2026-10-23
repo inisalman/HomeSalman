@@ -296,7 +296,7 @@ export const DATA = {
     },
     {
       title: "Setapak",
-      href: "https://setapak.build.web.id",
+      href: "https://setapak.ngaskep.web.id",
       dates: "2026 - Present",
       active: true,
       description:
@@ -313,7 +313,7 @@ export const DATA = {
       links: [
         {
           type: "Website",
-          href: "https://setapak.build.web.id",
+          href: "https://setapak.ngaskep.web.id",
           icon: <Icons.globe className="size-3" />,
         },
       ],
