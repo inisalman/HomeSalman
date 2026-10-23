@@ -142,6 +142,30 @@ export const DATA = {
   ],
   training: [
     {
+      school: "Dicoding",
+      href: "https://www.dicoding.com/certificates/53XEMO610PRN",
+      renderUrl: "",
+      degree: "Belajar Machine Learning untuk Pemula",
+      logoUrl:
+        "https://dicoding-web-img.sgp1.digitaloceanspaces.com/original/commons/new-ui-logo.png",
+      start: "October 2026",
+      end: "",
+      description:
+        "Completed Dicoding's beginner Machine Learning class covering the ML workflow, supervised learning (classification and regression), unsupervised learning (clustering), feature engineering, overfitting/underfitting, and hyperparameter tuning — capped with a final submission building ML models on tabular data.",
+    },
+    {
+      school: "Dicoding",
+      href: "https://www.dicoding.com/certificates/6RPNOD79QX2M",
+      renderUrl: "",
+      degree: "Memulai Pemrograman dengan Python",
+      logoUrl:
+        "https://dicoding-web-img.sgp1.digitaloceanspaces.com/original/commons/new-ui-logo.png",
+      start: "September 2026",
+      end: "",
+      description:
+        "Completed Dicoding's foundational Python programming class covering data types, control flow, functions, OOP, PEP8 style, and unit testing, with hands-on practice across Visual Studio Code, Jupyter Notebook, and Google Colaboratory.",
+    },
+    {
       school: "Hacktiv8 IBM SkillsBuild",
       href: "https://students.hacktiv8.com/certificates/bc0098be-f2cd-4b44-bbe9-731ecf192420",
       renderUrl:
