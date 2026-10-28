@@ -8,7 +8,7 @@ export const DATA = {
   location: "Yogyakarta, ID",
   locationLink: "https://www.google.com/maps/place/yogyakarta",
   description:
-    "Nurse & Full-Stack Developer | Healthcare AI Builder",
+    "Nurse & Website Developer | Healthcare AI Builder",
   summary:
     "Registered Nurse (Ns) with a strong passion for technology, especially web development. I build full-stack web applications and healthcare technology products — founder of [NakesPro](#projects), [Setapak](#projects), and [Ngaskep](#projects) — combining clinical domain expertise with production-grade web development. Currently based in Yogyakarta, Indonesia.",
   avatarUrl: "/me.png",
