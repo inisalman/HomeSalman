@@ -202,6 +202,32 @@ export const DATA = {
   ],
   projects: [
     {
+      title: "Setapak",
+      href: "https://setapak.ngaskep.web.id",
+      dates: "2026 - Present",
+      active: true,
+      description:
+        "Mental health self-help companion with PHQ-9/GAD-7 screening, daily mood check-in, and crisis support flow for users with anxiety and depressive symptoms.",
+      technologies: [
+        "Nuxt 3",
+        "NestJS",
+        "PostgreSQL",
+        "Prisma",
+        "Better Auth",
+        "Tailwind CSS",
+        "TypeScript",
+      ],
+      links: [
+        {
+          type: "Website",
+          href: "https://setapak.ngaskep.web.id",
+          icon: <Icons.globe className="size-3" />,
+        },
+      ],
+      image: "",
+      video: "/setapak.mp4",
+    },
+    {
       title: "NakesPro",
       href: "https://nakespro.id",
       dates: "2026 - Present",
@@ -317,32 +343,6 @@ export const DATA = {
       ],
       image: "",
       video: "/ngaskep.mp4",
-    },
-    {
-      title: "Setapak",
-      href: "https://setapak.ngaskep.web.id",
-      dates: "2026 - Present",
-      active: true,
-      description:
-        "Mental health self-help companion with PHQ-9/GAD-7 screening, daily mood check-in, and crisis support flow for users with anxiety and depressive symptoms.",
-      technologies: [
-        "Nuxt 3",
-        "NestJS",
-        "PostgreSQL",
-        "Prisma",
-        "Better Auth",
-        "Tailwind CSS",
-        "TypeScript",
-      ],
-      links: [
-        {
-          type: "Website",
-          href: "https://setapak.ngaskep.web.id",
-          icon: <Icons.globe className="size-3" />,
-        },
-      ],
-      image: "",
-      video: "/setapak.mp4",
     },
     {
       title: "Desain Grafis (Freelance)",
