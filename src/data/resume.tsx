@@ -229,7 +229,7 @@ export const DATA = {
     },
     {
       title: "NakesPro",
-      href: "https://nakespro.id",
+      href: "https://nakespro.id/nakes",
       dates: "2026 - Present",
       active: true,
       description:
@@ -247,7 +247,7 @@ export const DATA = {
       links: [
         {
           type: "Website",
-          href: "https://nakespro.id",
+          href: "https://nakespro.id/nakes",
           icon: <Icons.globe className="size-3" />,
         },
       ],
