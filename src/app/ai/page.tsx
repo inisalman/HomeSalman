@@ -4,7 +4,7 @@ import BlurFadeText from "@/components/magicui/blur-fade-text";
 import { TrainingModal } from "@/components/training-modal";
 import { AI_PROJECTS } from "@/data/ai-projects";
 import { DATA } from "@/data/resume";
-import { ArrowLeft, BrainCircuit } from "lucide-react";
+import { ArrowLeft } from "lucide-react";
 import type { Metadata } from "next";
 import Link from "next/link";
 
@@ -37,19 +37,13 @@ export default function AIPage() {
         </BlurFade>
 
         <div className="space-y-3">
-          <BlurFade delay={BLUR_FADE_DELAY * 2}>
-            <div className="inline-flex items-center gap-1.5 rounded-lg bg-foreground px-3 py-1 text-xs font-medium text-background">
-              <BrainCircuit className="size-3.5" />
-              AI · ML · DL
-            </div>
-          </BlurFade>
           <BlurFadeText
-            delay={BLUR_FADE_DELAY * 3}
+            delay={BLUR_FADE_DELAY * 2}
             className="text-3xl font-bold tracking-tighter sm:text-5xl/none"
             yOffset={8}
             text="AI & ML Projects"
           />
-          <BlurFade delay={BLUR_FADE_DELAY * 4}>
+          <BlurFade delay={BLUR_FADE_DELAY * 3}>
             <p className="max-w-[600px] text-sm text-muted-foreground sm:text-base">
               A dedicated space for my experiments, models, and applied AI
               projects — combining clinical healthcare experience with machine

@@ -46,7 +46,7 @@ export const DATA = {
   navbar: [
     { href: "/", icon: HomeIcon, label: "Home" },
     { href: "/#projects", icon: FolderIcon, label: "Projects" },
-    { href: "/ai", icon: BrainCircuitIcon, label: "AI / ML" },
+    { href: "/ai", icon: BrainCircuitIcon, label: "AI Projects" },
   ],
   contact: {
     email: "salmandevindo@gmail.com",
