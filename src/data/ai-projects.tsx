@@ -1,5 +1,4 @@
 import { Icons } from "@/components/icons";
-import { WoundVisionCardPreview } from "@/components/woundvision-card-preview";
 import { ArrowUpRight } from "lucide-react";
 import React from "react";
 
@@ -48,18 +47,19 @@ export const AI_PROJECTS: readonly AIProject[] = [
     category: "Deep Learning",
     status: "Live",
     description:
-      "Experimental 5-class wound tissue segmentation (epithelial, slough, granulation, necrotic, other) using U-Net ResNet34 exported to ONNX Runtime (~170 ms CPU inference).",
-    model: "U-Net ResNet34",
+      "V6-TwoStage coarse-to-fine wound localization and 5-class tissue segmentation using Two-Stage U-Net (ResNet18 + ResNet34) on ONNX Runtime (64.04% Clinical-3 Dice, 0% healthy-skin FPR).",
+    model: "Two-Stage U-Net (ResNet18 + ResNet34)",
     dataset: "LUTSeg",
-    metrics: "Clinical-3 Dice 59.45%",
+    metrics: "Clinical-3 Dice 64.04%",
     technologies: [
-      "PyTorch",
+      "V6-TwoStage",
+      "Two-Stage U-Net",
       "ONNX Runtime",
-      "U-Net ResNet34",
+      "0% Healthy-Skin FPR",
       "FastAPI",
       "Next.js",
     ],
-    preview: <WoundVisionCardPreview />,
+    video: "/woundvision.mp4",
     links: [
       {
         type: "Live Demo",
