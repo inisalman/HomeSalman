@@ -34,8 +34,11 @@ import {
   ScanSearch,
   SlidersHorizontal,
   Upload,
+  X,
+  ZoomIn,
 } from "lucide-react";
 import React from "react";
+import { createPortal } from "react-dom";
 
 type ServerStatus = "checking" | "healthy" | "offline";
 
@@ -154,9 +157,9 @@ export function WoundVisionDemo() {
   const [error, setError] = React.useState<string | null>(null);
   const [result, setResult] = React.useState<WoundVisionResponse | null>(null);
 
-  const [mobileView, setMobileView] = React.useState<"overlay" | "original">(
-    "overlay"
-  );
+  const [zoomedView, setZoomedView] = React.useState<
+    "original" | "overlay" | null
+  >(null);
   const [blurSamples, setBlurSamples] = React.useState<boolean>(true);
   const [availableSamples, setAvailableSamples] = React.useState<
     WoundVisionSample[]
@@ -301,7 +304,6 @@ export function WoundVisionDemo() {
       }
 
       setResult(payload as WoundVisionResponse);
-      setMobileView(payload.overlay ? "overlay" : "original");
     } catch (err) {
       setError(
         err instanceof Error
@@ -313,13 +315,27 @@ export function WoundVisionDemo() {
     }
   };
 
+  React.useEffect(() => {
+    if (!zoomedView) return;
+    const onKeyDown = (e: KeyboardEvent) => {
+      if (e.key === "Escape") {
+        setZoomedView(null);
+      } else if (e.key === "ArrowLeft" || e.key === "ArrowRight") {
+        if (!result?.overlay) return;
+        setZoomedView((prev) => (prev === "original" ? "overlay" : "original"));
+      }
+    };
+    window.addEventListener("keydown", onKeyDown);
+    return () => window.removeEventListener("keydown", onKeyDown);
+  }, [zoomedView, result?.overlay]);
+
   const handleReset = () => {
     setSelectedFile(null);
     setActiveSampleId(null);
     setResult(null);
     setError(null);
     setOpacityPercent(50);
-    setMobileView("overlay");
+    setZoomedView(null);
     setShowRawJson(false);
     setShowFullBase64(false);
     setCopiedJson(false);
@@ -756,112 +772,70 @@ export function WoundVisionDemo() {
               </div>
             </div>
 
-            {/* Original vs Segmentation Overlay */}
-            <div className="space-y-3">
-              {/* Mobile Tabs */}
-              <div
-                className="grid grid-cols-2 gap-1 rounded-lg border bg-muted/40 p-1 sm:hidden"
-                role="tablist"
-                aria-label="Toggle original and overlay image view"
-              >
-                <button
-                  type="button"
-                  role="tab"
-                  aria-selected={mobileView === "overlay"}
-                  onClick={() => setMobileView("overlay")}
-                  className={cn(
-                    "min-h-[38px] rounded-md px-3 py-1.5 text-xs font-medium transition-colors",
-                    mobileView === "overlay"
-                      ? "bg-background text-foreground shadow-sm"
-                      : "text-muted-foreground hover:text-foreground"
-                  )}
-                >
-                  Segmentation Overlay
-                </button>
-                <button
-                  type="button"
-                  role="tab"
-                  aria-selected={mobileView === "original"}
-                  onClick={() => setMobileView("original")}
-                  className={cn(
-                    "min-h-[38px] rounded-md px-3 py-1.5 text-xs font-medium transition-colors",
-                    mobileView === "original"
-                      ? "bg-background text-foreground shadow-sm"
-                      : "text-muted-foreground hover:text-foreground"
-                  )}
-                >
-                  Original Image
-                </button>
+            {/* Original vs Segmentation Overlay (Side-by-Side on Mobile & Desktop + Tap to Zoom) */}
+            <div className="space-y-2">
+              <div className="flex items-center justify-between text-[11px] text-muted-foreground">
+                <span>Before &amp; After Comparison</span>
+                <span className="inline-flex items-center gap-1">
+                  <ZoomIn className="size-3" aria-hidden="true" />
+                  Tap image to zoom
+                </span>
               </div>
 
-              {/* Mobile Active View */}
-              <div className="sm:hidden">
-                {mobileView === "original" ? (
-                  <figure className="overflow-hidden rounded-lg border bg-muted/30">
-                    {previewUrl && (
-                      // eslint-disable-next-line @next/next/no-img-element
+              <div className="grid grid-cols-2 gap-2 sm:gap-3">
+                <figure className="overflow-hidden rounded-lg border bg-muted/30">
+                  {previewUrl ? (
+                    <button
+                      type="button"
+                      onClick={() => setZoomedView("original")}
+                      aria-label="Zoom original wound image"
+                      className="group relative block w-full cursor-zoom-in focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-ring"
+                    >
+                      {/* eslint-disable-next-line @next/next/no-img-element */}
                       <img
                         src={previewUrl}
                         alt="Original uploaded wound photograph"
-                        className="max-h-80 w-full object-contain"
+                        className="h-44 w-full object-contain sm:h-64"
                       />
-                    )}
-                    <figcaption className="border-t bg-background px-3 py-2 text-[11px] font-medium text-muted-foreground">
-                      Original Input
-                    </figcaption>
-                  </figure>
-                ) : (
-                  <figure className="overflow-hidden rounded-lg border bg-muted/30">
-                    {result.overlay ? (
-                      // eslint-disable-next-line @next/next/no-img-element
-                      <img
-                        src={result.overlay}
-                        alt="Wound tissue segmentation overlay"
-                        className="max-h-80 w-full object-contain"
-                      />
-                    ) : (
-                      <div className="flex h-48 items-center justify-center text-xs text-muted-foreground">
-                        Overlay image not included in response.
-                      </div>
-                    )}
-                    <figcaption className="border-t bg-background px-3 py-2 text-[11px] font-medium text-muted-foreground">
-                      Segmentation Overlay ({opacityPercent}% opacity)
-                    </figcaption>
-                  </figure>
-                )}
-              </div>
-
-              {/* Desktop Side-by-Side View */}
-              <div className="hidden sm:grid sm:grid-cols-2 sm:gap-3">
-                <figure className="overflow-hidden rounded-lg border bg-muted/30">
-                  {previewUrl && (
-                    // eslint-disable-next-line @next/next/no-img-element
-                    <img
-                      src={previewUrl}
-                      alt="Original uploaded wound photograph"
-                      className="h-64 w-full object-contain"
-                    />
+                      <span className="pointer-events-none absolute bottom-2 right-2 flex size-7 items-center justify-center rounded-full bg-black/60 text-white opacity-80 transition-opacity group-hover:opacity-100">
+                        <ZoomIn className="size-3.5" aria-hidden="true" />
+                      </span>
+                    </button>
+                  ) : (
+                    <div className="flex h-44 items-center justify-center text-xs text-muted-foreground sm:h-64">
+                      No preview available.
+                    </div>
                   )}
-                  <figcaption className="border-t bg-background px-3 py-2 text-[11px] font-medium text-muted-foreground">
-                    Original Input
+                  <figcaption className="border-t bg-background px-2.5 py-2 text-[11px] font-medium text-muted-foreground sm:px-3">
+                    Original
                   </figcaption>
                 </figure>
 
                 <figure className="overflow-hidden rounded-lg border bg-muted/30">
                   {result.overlay ? (
-                    // eslint-disable-next-line @next/next/no-img-element
-                    <img
-                      src={result.overlay}
-                      alt="Wound tissue segmentation overlay"
-                      className="h-64 w-full object-contain"
-                    />
+                    <button
+                      type="button"
+                      onClick={() => setZoomedView("overlay")}
+                      aria-label="Zoom segmentation overlay image"
+                      className="group relative block w-full cursor-zoom-in focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-ring"
+                    >
+                      {/* eslint-disable-next-line @next/next/no-img-element */}
+                      <img
+                        src={result.overlay}
+                        alt="Wound tissue segmentation overlay"
+                        className="h-44 w-full object-contain sm:h-64"
+                      />
+                      <span className="pointer-events-none absolute bottom-2 right-2 flex size-7 items-center justify-center rounded-full bg-black/60 text-white opacity-80 transition-opacity group-hover:opacity-100">
+                        <ZoomIn className="size-3.5" aria-hidden="true" />
+                      </span>
+                    </button>
                   ) : (
-                    <div className="flex h-64 items-center justify-center text-xs text-muted-foreground">
-                      Overlay image not included in response.
+                    <div className="flex h-44 items-center justify-center px-2 text-center text-xs text-muted-foreground sm:h-64">
+                      Overlay not included.
                     </div>
                   )}
-                  <figcaption className="border-t bg-background px-3 py-2 text-[11px] font-medium text-muted-foreground">
-                    Segmentation Overlay ({opacityPercent}% opacity)
+                  <figcaption className="border-t bg-background px-2.5 py-2 text-[11px] font-medium text-muted-foreground sm:px-3">
+                    Overlay ({opacityPercent}%)
                   </figcaption>
                 </figure>
               </div>
@@ -1037,6 +1011,100 @@ export function WoundVisionDemo() {
           </CardContent>
         </Card>
       )}
+      {/* Fullscreen Zoom Lightbox */}
+      {zoomedView &&
+        typeof document !== "undefined" &&
+        createPortal(
+          <div
+            role="dialog"
+            aria-modal="true"
+            aria-label={
+              zoomedView === "original"
+                ? "Zoomed original wound image"
+                : "Zoomed segmentation overlay image"
+            }
+            className="fixed inset-0 z-[999] flex flex-col items-center justify-center bg-black/85 p-4 backdrop-blur-sm"
+            onClick={() => setZoomedView(null)}
+          >
+            <div
+              className="flex w-full max-w-3xl flex-col overflow-hidden rounded-xl border border-white/15 bg-background shadow-2xl"
+              onClick={(e) => e.stopPropagation()}
+            >
+              <div className="flex items-center justify-between gap-2 border-b px-3 py-2.5 sm:px-4">
+                <div className="inline-flex items-center gap-1 rounded-md border bg-muted/50 p-0.5">
+                  <button
+                    type="button"
+                    onClick={() => setZoomedView("original")}
+                    className={cn(
+                      "min-h-[34px] rounded px-3 py-1 text-xs font-medium transition-colors",
+                      zoomedView === "original"
+                        ? "bg-background text-foreground shadow-sm"
+                        : "text-muted-foreground hover:text-foreground"
+                    )}
+                  >
+                    Original
+                  </button>
+                  {result?.overlay && (
+                    <button
+                      type="button"
+                      onClick={() => setZoomedView("overlay")}
+                      className={cn(
+                        "min-h-[34px] rounded px-3 py-1 text-xs font-medium transition-colors",
+                        zoomedView === "overlay"
+                          ? "bg-background text-foreground shadow-sm"
+                          : "text-muted-foreground hover:text-foreground"
+                      )}
+                    >
+                      Overlay ({opacityPercent}%)
+                    </button>
+                  )}
+                </div>
+
+                <div className="flex items-center gap-1.5">
+                  {zoomedView === "overlay" && result?.overlay && (
+                    <Button
+                      type="button"
+                      variant="outline"
+                      size="sm"
+                      onClick={handleDownloadOverlay}
+                      className="h-9 gap-1.5 text-xs"
+                    >
+                      <Download className="size-3.5" aria-hidden="true" />
+                      <span className="hidden sm:inline">Download PNG</span>
+                    </Button>
+                  )}
+                  <button
+                    type="button"
+                    onClick={() => setZoomedView(null)}
+                    aria-label="Close zoom view"
+                    className="flex size-9 items-center justify-center rounded-md text-muted-foreground transition-colors hover:bg-muted hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+                  >
+                    <X className="size-4" aria-hidden="true" />
+                  </button>
+                </div>
+              </div>
+
+              <div className="flex items-center justify-center bg-black/90 p-2 sm:p-4">
+                {zoomedView === "original" && previewUrl ? (
+                  // eslint-disable-next-line @next/next/no-img-element
+                  <img
+                    src={previewUrl}
+                    alt="Original uploaded wound photograph (zoomed)"
+                    className="max-h-[75vh] w-full object-contain"
+                  />
+                ) : zoomedView === "overlay" && result?.overlay ? (
+                  // eslint-disable-next-line @next/next/no-img-element
+                  <img
+                    src={result.overlay}
+                    alt="Wound tissue segmentation overlay (zoomed)"
+                    className="max-h-[75vh] w-full object-contain"
+                  />
+                ) : null}
+              </div>
+            </div>
+          </div>,
+          document.body
+        )}
     </div>
   );
 }

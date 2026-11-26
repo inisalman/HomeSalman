@@ -1,4 +1,5 @@
 import { Icons } from "@/components/icons";
+import { WoundVisionCardPreview } from "@/components/woundvision-card-preview";
 import { ArrowUpRight } from "lucide-react";
 import React from "react";
 
@@ -15,6 +16,7 @@ export interface AIProjectLink {
 export interface AIProject {
   title: string;
   href?: string;
+  directLink?: boolean;
   dates: string;
   category: AIProjectCategory;
   status?: AIProjectStatus;
@@ -27,6 +29,7 @@ export interface AIProject {
   image?: string;
   images?: readonly string[];
   video?: string;
+  preview?: React.ReactNode;
 }
 
 export const AI_CATEGORIES: readonly ("All" | AIProjectCategory)[] = [
@@ -40,6 +43,7 @@ export const AI_PROJECTS: readonly AIProject[] = [
   {
     title: "WoundVision AI",
     href: "/ai/woundvision",
+    directLink: true,
     dates: "2026",
     category: "Deep Learning",
     status: "Live",
@@ -48,7 +52,14 @@ export const AI_PROJECTS: readonly AIProject[] = [
     model: "U-Net ResNet34",
     dataset: "LUTSeg",
     metrics: "Clinical-3 Dice 59.45%",
-    technologies: ["ONNX Runtime", "PyTorch", "FastAPI", "Next.js"],
+    technologies: [
+      "PyTorch",
+      "ONNX Runtime",
+      "U-Net ResNet34",
+      "FastAPI",
+      "Next.js",
+    ],
+    preview: <WoundVisionCardPreview />,
     links: [
       {
         type: "Live Demo",

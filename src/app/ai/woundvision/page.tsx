@@ -15,6 +15,7 @@ import {
   AlertTriangle,
   ArrowLeft,
   Cpu,
+  Database,
   ExternalLink,
   Layers,
 } from "lucide-react";
@@ -351,6 +352,79 @@ export default function WoundVisionPage() {
               </Button>
             </Link>
           </div>
+        </BlurFade>
+      </section>
+
+      <Separator />
+
+      {/* Dataset & Attribution */}
+      <section id="woundvision-attribution">
+        <BlurFade delay={BLUR_FADE_DELAY * 11}>
+          <Card className="border bg-muted/20">
+            <CardHeader className="p-5 pb-2.5">
+              <CardTitle className="flex items-center gap-2 text-base font-semibold">
+                <Database
+                  className="size-4 text-muted-foreground"
+                  aria-hidden="true"
+                />
+                Dataset &amp; Attribution
+              </CardTitle>
+            </CardHeader>
+            <CardContent className="space-y-3 p-5 pt-0 text-xs leading-relaxed text-muted-foreground">
+              <p>
+                Model ini dilatih menggunakan dataset{" "}
+                <Link
+                  href="https://huggingface.co/datasets/ksanchez84/LUTSeg"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="font-medium text-foreground underline underline-offset-4 hover:text-foreground/80"
+                >
+                  LUTSeg
+                </Link>{" "}
+                (
+                <em>
+                  LUTSeg: A Longitudinal Multi-Expert Dataset for Ulcer Tissue
+                  Segmentation
+                </em>
+                , Eleventh ISIC Skin Image Analysis Workshop @ MICCAI 2026),
+                yang menggunakan citra sumber dari CO2Wounds (
+                <Link
+                  href="https://doi.org/10.1016/j.compbiomed.2023.107753"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="font-medium text-foreground underline underline-offset-4 hover:text-foreground/80"
+                >
+                  DOI: 10.1016/j.compbiomed.2023.107753
+                </Link>
+                ).
+              </p>
+              <p>
+                Dataset dilisensikan di bawah{" "}
+                <Link
+                  href="https://creativecommons.org/licenses/by/4.0/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="font-medium text-foreground underline underline-offset-4 hover:text-foreground/80"
+                >
+                  CC BY 4.0
+                </Link>
+                . Citra medis bersifat sensitif dan model ini hanya untuk
+                prototipe riset, bukan perangkat medis atau dasar keputusan
+                klinis.
+              </p>
+              <div className="pt-1">
+                <Link
+                  href="https://huggingface.co/datasets/ksanchez84/LUTSeg"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-1.5 text-xs font-medium text-foreground underline underline-offset-4 hover:text-foreground/80"
+                >
+                  <span>huggingface.co/datasets/ksanchez84/LUTSeg</span>
+                  <ExternalLink className="size-3 opacity-70" aria-hidden="true" />
+                </Link>
+              </div>
+            </CardContent>
+          </Card>
         </BlurFade>
       </section>
     </main>

@@ -21,6 +21,7 @@ import Markdown from "react-markdown";
 interface Props {
   title: string;
   href?: string;
+  directLink?: boolean;
   description: string;
   dates: string;
   tags: readonly string[];
@@ -28,6 +29,7 @@ interface Props {
   image?: string;
   images?: readonly string[];
   video?: string;
+  preview?: React.ReactNode;
   links?: readonly {
     icon: React.ReactNode;
     type: string;
@@ -39,6 +41,7 @@ interface Props {
 export function ProjectCard({
   title,
   href,
+  directLink = false,
   description,
   dates,
   tags,
@@ -46,6 +49,7 @@ export function ProjectCard({
   image,
   images,
   video,
+  preview,
   links,
   className,
 }: Props) {
@@ -78,18 +82,20 @@ export function ProjectCard({
     return () => window.removeEventListener("keydown", onKey);
   }, [open, goPrev, goNext]);
 
-  const isInternalCard = Boolean(href && href.startsWith("/"));
+  const isDirectCard = Boolean(directLink && href);
+  const isExternalDirect = Boolean(href && !href.startsWith("/"));
+  const hasMedia = Boolean(video || coverImage || preview);
 
   return (
     <>
       <Card
         className={cn(
           "relative flex flex-col overflow-hidden border hover:shadow-lg transition-all duration-300 ease-out h-full",
-          isInternalCard && "group cursor-pointer hover:border-foreground/40"
+          isDirectCard && "group cursor-pointer hover:border-foreground/40"
         )}
       >
-        {(video || coverImage) &&
-          (isInternalCard ? (
+        {hasMedia &&
+          (isDirectCard ? (
             <div className={cn("block w-full", className)}>
               {video && (
                 <video
@@ -112,6 +118,7 @@ export function ProjectCard({
                   />
                 </div>
               )}
+              {!video && !coverImage && preview}
             </div>
           ) : (
             <button
@@ -146,13 +153,16 @@ export function ProjectCard({
                   )}
                 </div>
               )}
+              {!video && !coverImage && preview}
             </button>
           ))}
-        <CardHeader className={cn("px-2", !(video || coverImage) && "pt-3 px-3")}>
+        <CardHeader className="px-3 pt-2.5 pb-1">
           <div className="space-y-1">
-            {isInternalCard && href ? (
+            {isDirectCard && href ? (
               <Link
                 href={href}
+                target={isExternalDirect ? "_blank" : undefined}
+                rel={isExternalDirect ? "noopener noreferrer" : undefined}
                 className="inline-block group-hover:underline after:absolute after:inset-0 after:z-0 focus-visible:outline-none focus-visible:underline"
               >
                 <CardTitle className="mt-1 text-base">{title}</CardTitle>
@@ -160,29 +170,26 @@ export function ProjectCard({
             ) : (
               <CardTitle className="mt-1 text-base">{title}</CardTitle>
             )}
-            <time className="font-sans text-xs">{dates}</time>
+            <time className="block font-sans text-xs text-muted-foreground">
+              {dates}
+            </time>
             <div className="hidden font-sans text-xs underline print:visible">
               {link
                 ?.replace("https://", "")
                 .replace("www.", "")
                 .replace("/", "")}
             </div>
-            <Markdown className="prose max-w-full text-pretty font-sans text-xs text-muted-foreground dark:prose-invert">
+            <Markdown className="prose max-w-full text-pretty font-sans text-xs text-muted-foreground dark:prose-invert [&_p]:my-0">
               {description}
             </Markdown>
           </div>
         </CardHeader>
-        <CardContent
-          className={cn(
-            "mt-auto flex flex-col px-2",
-            !(video || coverImage) && "px-3"
-          )}
-        >
+        <CardContent className="mt-auto flex flex-col px-3 pt-2 pb-1">
           {tags && tags.length > 0 && (
-            <div className="mt-2 flex flex-wrap gap-1">
+            <div className="flex flex-wrap gap-1">
               {tags?.map((tag) => (
                 <Badge
-                  className="px-1 py-0 text-[10px]"
+                  className="px-1.5 py-0 text-[10px]"
                   variant="secondary"
                   key={tag}
                 >
@@ -192,11 +199,9 @@ export function ProjectCard({
             </div>
           )}
         </CardContent>
-        <CardFooter
-          className={cn("px-2 pb-2", !(video || coverImage) && "px-3 pb-3")}
-        >
+        <CardFooter className="px-3 pb-3 pt-2">
           {links && links.length > 0 && (
-            <div className="flex flex-row flex-wrap items-start gap-1">
+            <div className="flex flex-row flex-wrap items-start gap-1.5">
               {links?.map((item, idx) => {
                 const isInternal = item.href.startsWith("/");
                 return (

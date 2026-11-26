@@ -1,5 +1,11 @@
 import { Icons } from "@/components/icons";
-import { BrainCircuitIcon, FolderIcon, HomeIcon } from "lucide-react";
+import { WoundVisionCardPreview } from "@/components/woundvision-card-preview";
+import {
+  ArrowUpRight,
+  BrainCircuitIcon,
+  FolderIcon,
+  HomeIcon,
+} from "lucide-react";
 
 export const DATA = {
   name: "Salman Al Farisi",
@@ -202,6 +208,43 @@ export const DATA = {
     },
   ],
   projects: [
+    {
+      title: "WoundVision AI",
+      href: "/ai/woundvision",
+      directLink: true,
+      dates: "2026 - Present",
+      active: true,
+      description:
+        "Experimental 5-class wound tissue segmentation (epithelial, slough, granulation, necrotic, other) using U-Net ResNet34 exported to ONNX Runtime (~170 ms CPU inference).",
+      technologies: [
+        "PyTorch",
+        "ONNX Runtime",
+        "U-Net ResNet34",
+        "FastAPI",
+        "Next.js",
+        "TypeScript",
+      ],
+      links: [
+        {
+          type: "Live Demo",
+          href: "/ai/woundvision",
+          icon: <ArrowUpRight className="size-3" />,
+        },
+        {
+          type: "GitHub",
+          href: "https://github.com/inisalman/woundvision-ai",
+          icon: <Icons.github className="size-3" />,
+        },
+        {
+          type: "Hugging Face",
+          href: "https://huggingface.co/salmanid/woundvision-ai",
+          icon: <Icons.globe className="size-3" />,
+        },
+      ],
+      image: "",
+      video: "",
+      preview: <WoundVisionCardPreview />,
+    },
     {
       title: "Setapak",
       href: "https://setapak.ngaskep.web.id",

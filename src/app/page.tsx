@@ -181,6 +181,7 @@ export default function Page() {
               >
                 <ProjectCard
                   href={project.href}
+                  directLink={(project as { directLink?: boolean }).directLink}
                   key={project.title}
                   title={project.title}
                   description={project.description}
@@ -189,6 +190,7 @@ export default function Page() {
                   image={project.image}
                   images={(project as { images?: readonly string[] }).images}
                   video={project.video}
+                  preview={(project as { preview?: React.ReactNode }).preview}
                   links={project.links}
                 />
               </BlurFade>
