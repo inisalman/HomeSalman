@@ -78,49 +78,88 @@ export function ProjectCard({
     return () => window.removeEventListener("keydown", onKey);
   }, [open, goPrev, goNext]);
 
+  const isInternalCard = Boolean(href && href.startsWith("/"));
+
   return (
     <>
       <Card
-        className={
-          "flex flex-col overflow-hidden border hover:shadow-lg transition-all duration-300 ease-out h-full"
-        }
+        className={cn(
+          "relative flex flex-col overflow-hidden border hover:shadow-lg transition-all duration-300 ease-out h-full",
+          isInternalCard && "group cursor-pointer hover:border-foreground/40"
+        )}
       >
-        <button
-          type="button"
-          onClick={() => setOpen(true)}
-          aria-label={`Open ${title} details`}
-          className={cn("block w-full cursor-pointer", className)}
-        >
-          {video && (
-            <video
-              src={video}
-              autoPlay
-              loop
-              muted
-              playsInline
-              className="pointer-events-none mx-auto h-40 w-full object-cover object-top" // needed because random black line at bottom of video
-            />
-          )}
-          {!video && coverImage && (
-            <div className="relative">
-              <Image
-                src={coverImage}
-                alt={title}
-                width={500}
-                height={300}
-                className="h-40 w-full overflow-hidden object-cover object-top"
-              />
-              {hasGallery && (
-                <span className="absolute bottom-2 right-2 rounded-full bg-black/70 px-2 py-0.5 text-[10px] font-medium text-white">
-                  {images!.length} photos
-                </span>
+        {(video || coverImage) &&
+          (isInternalCard ? (
+            <div className={cn("block w-full", className)}>
+              {video && (
+                <video
+                  src={video}
+                  autoPlay
+                  loop
+                  muted
+                  playsInline
+                  className="pointer-events-none mx-auto h-40 w-full object-cover object-top"
+                />
+              )}
+              {!video && coverImage && (
+                <div className="relative">
+                  <Image
+                    src={coverImage}
+                    alt={title}
+                    width={500}
+                    height={300}
+                    className="h-40 w-full overflow-hidden object-cover object-top"
+                  />
+                </div>
               )}
             </div>
-          )}
-        </button>
-        <CardHeader className="px-2">
+          ) : (
+            <button
+              type="button"
+              onClick={() => setOpen(true)}
+              aria-label={`Open ${title} details`}
+              className={cn("block w-full cursor-pointer", className)}
+            >
+              {video && (
+                <video
+                  src={video}
+                  autoPlay
+                  loop
+                  muted
+                  playsInline
+                  className="pointer-events-none mx-auto h-40 w-full object-cover object-top" // needed because random black line at bottom of video
+                />
+              )}
+              {!video && coverImage && (
+                <div className="relative">
+                  <Image
+                    src={coverImage}
+                    alt={title}
+                    width={500}
+                    height={300}
+                    className="h-40 w-full overflow-hidden object-cover object-top"
+                  />
+                  {hasGallery && (
+                    <span className="absolute bottom-2 right-2 rounded-full bg-black/70 px-2 py-0.5 text-[10px] font-medium text-white">
+                      {images!.length} photos
+                    </span>
+                  )}
+                </div>
+              )}
+            </button>
+          ))}
+        <CardHeader className={cn("px-2", !(video || coverImage) && "pt-3 px-3")}>
           <div className="space-y-1">
-            <CardTitle className="mt-1 text-base">{title}</CardTitle>
+            {isInternalCard && href ? (
+              <Link
+                href={href}
+                className="inline-block group-hover:underline after:absolute after:inset-0 after:z-0 focus-visible:outline-none focus-visible:underline"
+              >
+                <CardTitle className="mt-1 text-base">{title}</CardTitle>
+              </Link>
+            ) : (
+              <CardTitle className="mt-1 text-base">{title}</CardTitle>
+            )}
             <time className="font-sans text-xs">{dates}</time>
             <div className="hidden font-sans text-xs underline print:visible">
               {link
@@ -133,7 +172,12 @@ export function ProjectCard({
             </Markdown>
           </div>
         </CardHeader>
-        <CardContent className="mt-auto flex flex-col px-2">
+        <CardContent
+          className={cn(
+            "mt-auto flex flex-col px-2",
+            !(video || coverImage) && "px-3"
+          )}
+        >
           {tags && tags.length > 0 && (
             <div className="mt-2 flex flex-wrap gap-1">
               {tags?.map((tag) => (
@@ -148,17 +192,28 @@ export function ProjectCard({
             </div>
           )}
         </CardContent>
-        <CardFooter className="px-2 pb-2">
+        <CardFooter
+          className={cn("px-2 pb-2", !(video || coverImage) && "px-3 pb-3")}
+        >
           {links && links.length > 0 && (
             <div className="flex flex-row flex-wrap items-start gap-1">
-              {links?.map((link, idx) => (
-                <Link href={link?.href} key={idx} target="_blank">
-                  <Badge key={idx} className="flex gap-2 px-2 py-1 text-[10px]">
-                    {link.icon}
-                    {link.type}
-                  </Badge>
-                </Link>
-              ))}
+              {links?.map((item, idx) => {
+                const isInternal = item.href.startsWith("/");
+                return (
+                  <Link
+                    href={item.href}
+                    key={idx}
+                    target={isInternal ? undefined : "_blank"}
+                    rel={isInternal ? undefined : "noopener noreferrer"}
+                    className="relative z-10"
+                  >
+                    <Badge className="flex gap-1.5 px-2 py-1 text-[10px]">
+                      {item.icon}
+                      {item.type}
+                    </Badge>
+                  </Link>
+                );
+              })}
             </div>
           )}
         </CardFooter>
@@ -300,19 +355,22 @@ export function ProjectCard({
 
                   {links && links.length > 0 && (
                     <div className="mt-5 flex flex-row flex-wrap items-center gap-2">
-                      {links.map((l, idx) => (
-                        <Link
-                          href={l.href}
-                          key={idx}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                        >
-                          <Button size="sm" className="gap-1.5">
-                            {l.icon}
-                            {l.type}
-                          </Button>
-                        </Link>
-                      ))}
+                      {links.map((l, idx) => {
+                        const isInternal = l.href.startsWith("/");
+                        return (
+                          <Link
+                            href={l.href}
+                            key={idx}
+                            target={isInternal ? undefined : "_blank"}
+                            rel={isInternal ? undefined : "noopener noreferrer"}
+                          >
+                            <Button size="sm" className="gap-1.5">
+                              {l.icon}
+                              {l.type}
+                            </Button>
+                          </Link>
+                        );
+                      })}
                     </div>
                   )}
                 </div>

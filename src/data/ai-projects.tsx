@@ -1,3 +1,5 @@
+import { Icons } from "@/components/icons";
+import { ArrowUpRight } from "lucide-react";
 import React from "react";
 
 export type AIProjectCategory = "AI" | "Machine Learning" | "Deep Learning";
@@ -34,29 +36,35 @@ export const AI_CATEGORIES: readonly ("All" | AIProjectCategory)[] = [
   "Deep Learning",
 ] as const;
 
-/**
- * Add AI / ML / DL showcase projects here.
- *
- * Example:
- * {
- *   title: "Clinical Risk Predictor",
- *   href: "https://github.com/inisalman/clinical-risk-predictor",
- *   dates: "2026",
- *   category: "Machine Learning",
- *   status: "Prototype",
- *   description:
- *     "Tabular classification model predicting patient readmission risk with SHAP explainability.",
- *   model: "XGBoost + SHAP",
- *   metrics: "ROC-AUC 0.91",
- *   technologies: ["Python", "Scikit-learn", "XGBoost", "Pandas", "Streamlit"],
- *   links: [
- *     {
- *       type: "Source",
- *       href: "https://github.com/inisalman/clinical-risk-predictor",
- *       icon: <Icons.github className="size-3" />,
- *     },
- *   ],
- *   image: "/ai/clinical-risk.webp",
- * }
- */
-export const AI_PROJECTS: readonly AIProject[] = [];
+export const AI_PROJECTS: readonly AIProject[] = [
+  {
+    title: "WoundVision AI",
+    href: "/ai/woundvision",
+    dates: "2026",
+    category: "Deep Learning",
+    status: "Live",
+    description:
+      "Experimental 5-class wound tissue segmentation (epithelial, slough, granulation, necrotic, other) using U-Net ResNet34 exported to ONNX Runtime (~170 ms CPU inference).",
+    model: "U-Net ResNet34",
+    dataset: "LUTSeg",
+    metrics: "Clinical-3 Dice 59.45%",
+    technologies: ["ONNX Runtime", "PyTorch", "FastAPI", "Next.js"],
+    links: [
+      {
+        type: "Live Demo",
+        href: "/ai/woundvision",
+        icon: <ArrowUpRight className="size-3" />,
+      },
+      {
+        type: "GitHub",
+        href: "https://github.com/inisalman/woundvision-ai",
+        icon: <Icons.github className="size-3" />,
+      },
+      {
+        type: "Hugging Face",
+        href: "https://huggingface.co/salmanid/woundvision-ai",
+        icon: <Icons.globe className="size-3" />,
+      },
+    ],
+  },
+];
