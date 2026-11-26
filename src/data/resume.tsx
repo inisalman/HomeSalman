@@ -1,5 +1,5 @@
 import { Icons } from "@/components/icons";
-import { FolderIcon, HomeIcon } from "lucide-react";
+import { BrainCircuitIcon, FolderIcon, HomeIcon } from "lucide-react";
 
 export const DATA = {
   name: "Salman Al Farisi",
@@ -46,6 +46,7 @@ export const DATA = {
   navbar: [
     { href: "/", icon: HomeIcon, label: "Home" },
     { href: "/#projects", icon: FolderIcon, label: "Projects" },
+    { href: "/ai", icon: BrainCircuitIcon, label: "AI / ML" },
   ],
   contact: {
     email: "salmandevindo@gmail.com",
