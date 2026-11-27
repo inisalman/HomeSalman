@@ -16,7 +16,7 @@ export const DATA = {
     "Website Developer | Healthcare AI Builder",
   summary:
     "Registered Nurse (Ns) with over 4 years of clinical experience in psychiatric and pulmonary care — now building production web applications and healthcare technology products. Founder of [NakesPro](#projects), [Setapak](#projects), and [Ngaskep](#projects), combining clinical domain expertise with modern web development. Currently based in Yogyakarta, Indonesia.",
-  avatarUrl: "/me.png",
+  avatarUrl: "/me.jpg",
   skills: {
     own: [
       "Python",
